@@ -1,21 +1,52 @@
 using System;
-namespace consoleApplication1
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace WindowsFormsApplication8
 {
-    class program
+    public partial class Form1 : Form
     {
-        static void Main(string[] args)
+        public Form1()
         {
-            int num1, num2, num3, num4, prod;
-            Console.Write("Enter Number:");
-            num1 = Int32.Parse(Console.ReadLine());
-            Console.Write("Enter Number 2:");
-            num2 = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Number 3:");
-            num3=Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Number 4:");
-            num4=Convert.ToInt32(Console.ReadLine());
-            prod = num1 * num2 * num3 * num4;
-            Console.WriteLine(num1 + "*" + num2 + "*" + num3 + "*" + num4 + "=" + prod);
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                MessageBox.Show("Enter Username !!");
+            }
+            else if (textBox1.Text == "")
+            {
+                MessageBox.Show("Enter Password !!");
+            }
+            else if (textBox1.Text == "Gripsy" && textBox1.Text == "123")
+            {
+                this.Hide();
+                Form frm2 = new Form1();
+                frm2.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Credential", "Try Again");
+            }
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
