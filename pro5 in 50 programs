@@ -1,0 +1,32 @@
+DIGITAL CLOCK
+using System;
+using System.Windows.Forms;
+class DigitalClock : Form
+{
+    Timer timer;
+    Label timeLabel;
+    public DigitalClock()
+    {
+        timeLabel = new Label
+        {
+            Font = new System.Drawing.Font("Arial", 24),
+            Dock = DockStyle.Fill,
+            TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        };
+        timer = new Timer { Interval = 1000 };
+        timer.Tick += UpdateTime;
+        timer.Start();
+        Controls.Add(timeLabel);
+        UpdateTime(null, null);
+    }
+    private void UpdateTime(object sender, EventArgs e)
+    {
+        timeLabel.Text = DateTime.Now.ToString("HH:mm:ss");
+    }
+    [STAThread]
+    static void Main()
+    {
+        Application.EnableVisualStyles();
+        Application.Run(new DigitalClock());
+    }
+}
