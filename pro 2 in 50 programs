@@ -1,0 +1,17 @@
+PALINDROM SYSTEM
+using System;
+
+class Palindrome
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+        string reversed = new string(input.Reverse().ToArray());
+
+        if (input == reversed)
+            Console.WriteLine("The string is a palindrome.");
+        else
+            Console.WriteLine("The string is not a palindrome.");
+    }
+}
