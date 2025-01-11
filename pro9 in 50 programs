@@ -1,0 +1,66 @@
+CIRCULAR QUEUE IMPLEMENTATION
+using System;
+class CircularQueue
+{
+    private int[] queue;
+    private int front, rear, size;
+
+    public CircularQueue(int capacity)
+    {
+        queue = new int[capacity];
+        front = rear = -1;
+        size = capacity;
+    }
+    public void Enqueue(int data)
+    {
+        if ((rear + 1) % size == front)
+        {
+            Console.WriteLine("Queue is Full");
+            return;
+        }
+        if (front == -1) front = 0;
+        rear = (rear + 1) % size;
+        queue[rear] = data;
+    }
+    public void Dequeue()
+    {
+        if (front == -1)
+        {
+            Console.WriteLine("Queue is Empty");
+            return;
+        }
+
+        Console.WriteLine($"Dequeued: {queue[front]}");
+        if (front == rear)
+            front = rear = -1;
+        else
+            front = (front + 1) % size;
+    }
+    public void Display()
+    {
+        if (front == -1)
+        {
+            Console.WriteLine("Queue is Empty");
+            return;
+        }
+        Console.Write("Queue: ");
+        int i = front;
+        while (true)
+        {
+            Console.Write(queue[i] + " ");
+            if (i == rear) break;
+            i = (i + 1) % size;
+        }
+        Console.WriteLine();
+    }
+    static void Main()
+    {
+        CircularQueue cq = new CircularQueue(5);
+        cq.Enqueue(10);
+        cq.Enqueue(20);
+        cq.Enqueue(30);
+        cq.Display();
+        cq.Dequeue();
+        cq.Display();
+    }
+}
