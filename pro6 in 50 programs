@@ -1,0 +1,21 @@
+DATABASE INSERT
+using System;
+using System.Data.SqlClient;
+
+class DatabaseInsert
+{
+    static void Main()
+    {
+        string connectionString = "Server=YOUR_SERVER;Database=YOUR_DATABASE;User Id=YOUR_USERNAME;Password=YOUR_PASSWORD;";
+        string query = "INSERT INTO Employees (Name, Age, Department) VALUES ('John Doe', 30, 'HR')";
+
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            SqlCommand command = new SqlCommand(query, connection);
+            connection.Open();
+
+            int rowsAffected = command.ExecuteNonQuery();
+            Console.WriteLine($"{rowsAffected} row(s) inserted.");
+        }
+    }
+}
