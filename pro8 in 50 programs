@@ -1,0 +1,17 @@
+CHECK IF FILE EXISTS
+using System;
+using System.IO;
+
+class CheckFile
+{
+    static void Main()
+    {
+        Console.Write("Enter file path: ");
+        string filePath = Console.ReadLine();
+
+        if (File.Exists(filePath))
+            Console.WriteLine("The file exists.");
+        else
+            Console.WriteLine("The file does not exist.");
+    }
+}
