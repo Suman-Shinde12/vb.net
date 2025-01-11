@@ -1,0 +1,18 @@
+FILE WRITE AND READ
+using System;
+using System.IO;
+
+class FileExample
+{
+    static void Main()
+    {
+        string filePath = "example.txt";
+
+        // Write to file
+        File.WriteAllText(filePath, "Hello, this is a test file!");
+
+        // Read from file
+        string content = File.ReadAllText(filePath);
+        Console.WriteLine($"File Content: {content}");
+    }
+}
