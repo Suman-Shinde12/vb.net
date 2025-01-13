@@ -1,0 +1,20 @@
+LINQ QUERY ON A LIST
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class LINQExample
+{
+    static void Main()
+    {
+        List<int> numbers = new List<int> { 5, 1, 8, 2, 3, 7, 6, 4 };
+        var evenNumbers = numbers.Where(n => n % 2 == 0).OrderBy(n => n);
+
+        Console.WriteLine("Even Numbers:");
+        foreach (var num in evenNumbers)
+        {
+            Console.WriteLine(num);
+        }
+    }
+}
+
