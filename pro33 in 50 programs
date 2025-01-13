@@ -1,0 +1,24 @@
+MERGE TWO FILES INTO ONE
+using System;
+using System.IO;
+class MergeFiles
+{
+    static void Main()
+    {
+        Console.Write("Enter the first file path: ");
+        string file1 = Console.ReadLine();
+        Console.Write("Enter the second file path: ");
+        string file2 = Console.ReadLine();
+        Console.Write("Enter the output file path: ");
+        string outputFile = Console.ReadLine();
+        using (StreamWriter writer = new StreamWriter(outputFile))
+        {
+            foreach (string line in File.ReadLines(file1))
+                writer.WriteLine(line);
+            foreach (string line in File.ReadLines(file2))
+                writer.WriteLine(line);
+        }
+        Console.WriteLine("Files merged successfully!");
+    }
+}
+
