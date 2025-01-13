@@ -1,0 +1,26 @@
+MONITOR NETWORK TRAFFIC USING PACKET CAPTURE
+using System;
+using PacketDotNet;
+using SharpPcap;
+class NetworkMonitor
+{
+    static void Main()
+    {
+        foreach (var device in CaptureDeviceList.Instance)
+            Console.WriteLine(device.ToString());
+        Console.Write("Select a device: ");
+        int index = int.Parse(Console.ReadLine());
+        var device = CaptureDeviceList.Instance[index];
+        device.OnPacketArrival += (sender, e) =>
+        {
+            var packet = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
+            Console.WriteLine(packet);
+        };
+        device.Open();
+        device.StartCapture();
+        Console.WriteLine("Press Enter to stop...");
+        Console.ReadLine();
+        device.StopCapture();
+        device.Close();
+    }
+}
