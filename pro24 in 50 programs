@@ -1,0 +1,27 @@
+FIND ALL PALINDROMIC SUBSTRINGS IN A STRING
+using System;
+class PalindromicSubstrings
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+
+        Console.WriteLine("Palindromic substrings:");
+        for (int i = 0; i < input.Length; i++)
+        {
+            for (int j = i + 1; j <= input.Length; j++)
+            {
+                string substring = input.Substring(i, j - i);
+                if (IsPalindrome(substring))
+                    Console.WriteLine(substring);
+            }
+        }
+    }
+
+    static bool IsPalindrome(string s)
+    {
+        return s == new string(s.Reverse().ToArray());
+    }
+}
+
