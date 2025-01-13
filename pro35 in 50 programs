@@ -1,0 +1,29 @@
+SYNCHRONIZE THREADS USING MUTEX
+using System;
+using System.Threading;
+class MutexExample
+{
+    static Mutex mutex = new Mutex();
+    static void PrintNumbers(string threadName)
+    {
+        mutex.WaitOne();
+        Console.WriteLine($"{threadName} is starting.");
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine($"{threadName}: {i}");
+            Thread.Sleep(500);
+        }
+        Console.WriteLine($"{threadName} is ending.");
+        mutex.ReleaseMutex();
+    }
+    static void Main()
+    {
+        Thread t1 = new Thread(() => PrintNumbers("Thread 1"));
+        Thread t2 = new Thread(() => PrintNumbers("Thread 2"));
+        t1.Start();
+        t2.Start();
+        t1.Join();
+        t2.Join();
+    }
+}
+
