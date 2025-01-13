@@ -1,0 +1,49 @@
+CREATE A TO-DO LIST APP
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+class ToDoListApp : Form
+{
+    List<string> tasks = new List<string>();
+    ListBox taskListBox;
+    TextBox taskInput;
+    public ToDoListApp()
+    {
+        taskListBox = new ListBox { Dock = DockStyle.Top, Height = 200 };
+        taskInput = new TextBox { Dock = DockStyle.Top, PlaceholderText = "Enter a new task" };
+        Button addButton = new Button { Text = "Add Task", Dock = DockStyle.Top };
+        addButton.Click += AddTask;
+        Button removeButton = new Button { Text = "Remove Selected Task", Dock = DockStyle.Top };
+        removeButton.Click += RemoveTask;
+        Controls.Add(removeButton);
+        Controls.Add(addButton);
+        Controls.Add(taskInput);
+        Controls.Add(taskListBox);
+    }
+
+    private void AddTask(object sender, EventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(taskInput.Text))
+        {
+            tasks.Add(taskInput.Text);
+            taskListBox.Items.Add(taskInput.Text);
+            taskInput.Clear();
+        }
+    }
+    private void RemoveTask(object sender, EventArgs e)
+    {
+        if (taskListBox.SelectedItem != null)
+        {
+            string selectedTask = taskListBox.SelectedItem.ToString();
+            tasks.Remove(selectedTask);
+            taskListBox.Items.Remove(selectedTask);
+        }
+    }
+
+    [STAThread]
+    static void Main()
+    {
+        Application.Run(new ToDoListApp());
+    }
+}
+
