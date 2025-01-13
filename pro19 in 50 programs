@@ -1,0 +1,21 @@
+COUNT NUMBER OF LINES IN A FILE
+using System;
+using System.IO;
+class LineCounter
+{
+    static void Main()
+    {
+        Console.Write("Enter file path: ");
+        string filePath = Console.ReadLine();
+        if (File.Exists(filePath))
+        {
+            int lineCount = File.ReadAllLines(filePath).Length;
+            Console.WriteLine($"The file contains {lineCount} lines.");
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
+        }
+    }
+}
+
