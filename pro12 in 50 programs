@@ -1,0 +1,13 @@
+COUNT WORDS IN A STRING
+using System;
+
+class WordCount
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a string:");
+        string input = Console.ReadLine();
+        int wordCount = input.Split(new[] { ' ', '\t', '\n' }, StringSplitOptions.RemoveEmptyEntries).Length;
+        Console.WriteLine($"The string contains {wordCount} word(s).");
+    }
+}
