@@ -1,0 +1,37 @@
+CRUD OPERATIONS USING ENTITY FRAMEWORK CORE
+using System;
+using Microsoft.EntityFrameworkCore;
+class ProductContext : DbContext
+{
+    public DbSet<Product> Products { get; set; }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder.UseSqlServer("Your_Connection_String_Here");
+    }
+}
+class Product
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public decimal Price { get; set; }
+}
+class Program
+{
+    static void Main()
+    {
+        using (var db = new ProductContext())
+        {
+            db.Products.Add(new Product { Name = "Laptop", Price = 1500.00M });
+            db.SaveChanges();
+            foreach (var product in db.Products)
+                Console.WriteLine($"Id: {product.Id}, Name: {product.Name}, Price: {product.Price}");
+            var firstProduct = db.Products.First();
+            firstProduct.Price = 1400.00M;
+            db.SaveChanges();
+            db.Products.Remove(firstProduct);
+            db.SaveChanges();
+        }
+    }
+}
+
