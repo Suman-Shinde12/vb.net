@@ -1,0 +1,25 @@
+FIND ARMSTRONG NUMBERS IN A RANGE
+using System;
+class ArmstrongNumbers
+{
+    static void Main()
+    {
+        Console.Write("Enter the range (start and end): ");
+        int start = int.Parse(Console.ReadLine());
+        int end = int.Parse(Console.ReadLine());
+        Console.WriteLine("Armstrong numbers in the range:");
+        for (int num = start; num <= end; num++)
+        {
+            int sum = 0, temp = num, digits = num.ToString().Length;
+            while (temp > 0)
+            {
+                int digit = temp % 10;
+                sum += (int)Math.Pow(digit, digits);
+                temp /= 10;
+            }
+            if (sum == num)
+                Console.WriteLine(num);
+        }
+    }
+}
+
