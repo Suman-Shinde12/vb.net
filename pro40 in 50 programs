@@ -1,0 +1,38 @@
+BUILD A TASK MANAGEMENT SYSTEM
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
+class TaskManager : Form
+{
+    List<string> tasks = new List<string>();
+    ListBox taskListBox;
+    TextBox taskInput;
+    public TaskManager()
+    {
+        Text = "Task Manager";
+        Width = 400;
+        Height = 300;
+        taskInput = new TextBox { Top = 10, Left = 10, Width = 250 };
+        Button addTaskButton = new Button { Text = "Add Task", Top = 10, Left = 270 };
+        taskListBox = new ListBox { Top = 50, Left = 10, Width = 350, Height = 200 };
+        addTaskButton.Click += AddTask;
+        Controls.Add(taskInput);
+        Controls.Add(addTaskButton);
+        Controls.Add(taskListBox);
+    }
+    private void AddTask(object sender, EventArgs e)
+    {
+        if (!string.IsNullOrWhiteSpace(taskInput.Text))
+        {
+            tasks.Add(taskInput.Text);
+            taskListBox.Items.Add(taskInput.Text);
+            taskInput.Clear();
+        }
+    }
+    [STAThread]
+    static void Main()
+    {
+        Application.Run(new TaskManager());
+    }
+}
+
