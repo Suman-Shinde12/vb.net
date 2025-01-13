@@ -1,0 +1,15 @@
+REVERSE WORDS IN A SENTENCE WITHOUT REVERSING CHARACTERS
+using System;
+class ReverseWords
+{
+    static void Main()
+    {
+        Console.Write("Enter a sentence: ");
+        string sentence = Console.ReadLine();
+        string[] words = sentence.Split(' ');
+        Array.Reverse(words);
+        string result = string.Join(" ", words);
+        Console.WriteLine($"Reversed: {result}");
+    }
+}
+
