@@ -6,7 +6,6 @@ class PalindromicSubstrings
     {
         Console.WriteLine("Enter a string:");
         string input = Console.ReadLine();
-
         Console.WriteLine("Palindromic substrings:");
         for (int i = 0; i < input.Length; i++)
         {
