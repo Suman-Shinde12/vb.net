@@ -1,0 +1,16 @@
+CHECK IF TWO STRINGS ARE ANAGRAMS
+using System;
+using System.Linq;
+class AnagramCheck
+{
+    static void Main()
+    {
+        Console.Write("Enter the first string: ");
+        string str1 = Console.ReadLine();
+        Console.Write("Enter the second string: ");
+        string str2 = Console.ReadLine();
+        bool areAnagrams = str1.OrderBy(c => c).SequenceEqual(str2.OrderBy(c => c));
+        Console.WriteLine(areAnagrams ? "The strings are anagrams." : "The strings are not anagrams.");
+    }
+}
+
