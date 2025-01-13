@@ -1,0 +1,46 @@
+WEATHER FETCHER APP
+using System;
+using System.Net.Http;
+using System.Windows.Forms;
+class WeatherApp : Form
+{
+    TextBox cityTextBox;
+    Label resultLabel;
+    public WeatherApp()
+    {
+        cityTextBox = new TextBox { Dock = DockStyle.Top, PlaceholderText = "Enter city name" };
+        Button fetchButton = new Button { Text = "Fetch Weather", Dock = DockStyle.Top };
+        resultLabel = new Label { Dock = DockStyle.Fill, TextAlign = System.Drawing.ContentAlignment.MiddleCenter };
+        fetchButton.Click += FetchWeather;
+        Controls.Add(resultLabel);
+        Controls.Add(fetchButton);
+        Controls.Add(cityTextBox);
+    }
+    private async void FetchWeather(object sender, EventArgs e)
+    {
+        string city = cityTextBox.Text.Trim();
+        if (string.IsNullOrEmpty(city))
+        {
+            resultLabel.Text = "Please enter a city name.";
+            return;
+        }
+        string apiKey = "YOUR_API_KEY";
+        string apiUrl = $"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}";
+        using HttpClient client = new HttpClient();
+        try
+        {
+            string response = await client.GetStringAsync(apiUrl);
+            resultLabel.Text = response;
+        }
+        catch (Exception ex)
+        {
+            resultLabel.Text = $"Error: {ex.Message}";
+        }
+    }
+    [STAThread]
+    static void Main()
+    {
+        Application.Run(new WeatherApp());
+    }
+}
+
