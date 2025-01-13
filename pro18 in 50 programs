@@ -1,0 +1,13 @@
+REVERSE WORDS IN A SENTENCE
+using System;
+class ReverseWords
+{
+    static void Main()
+    {
+        Console.WriteLine("Enter a sentence:");
+        string sentence = Console.ReadLine();
+        string reversed = string.Join(" ", sentence.Split(' ').Reverse());
+        Console.WriteLine($"Reversed sentence: {reversed}");
+    }
+}
+
