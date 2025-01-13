@@ -1,0 +1,20 @@
+CALCULATE SUM OF EVEN NUMBERS IN A RANGE
+using System;
+class SumEvenNumbers
+{
+    static void Main()
+    {
+        Console.Write("Enter start of range: ");
+        int start = int.Parse(Console.ReadLine());
+        Console.Write("Enter end of range: ");
+        int end = int.Parse(Console.ReadLine());
+        int sum = 0;
+        for (int i = start; i <= end; i++)
+        {
+            if (i % 2 == 0)
+                sum += i;
+        }
+        Console.WriteLine($"Sum of even numbers between {start} and {end} is {sum}.");
+    }
+}
+
