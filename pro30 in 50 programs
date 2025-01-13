@@ -1,0 +1,17 @@
+FETCH AND PARSE DATA FROM A REST API
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+class RestApiClient
+{
+    static async Task Main()
+    {
+        string url = "https://jsonplaceholder.typicode.com/posts";
+        using (HttpClient client = new HttpClient())
+        {
+            string response = await client.GetStringAsync(url);
+            Console.WriteLine(response);
+        }
+    }
+}
+
