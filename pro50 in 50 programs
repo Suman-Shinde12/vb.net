@@ -1,0 +1,16 @@
+CHECK IF A STRING IS A VALID ANAGRAM
+using System;
+using System.Linq;
+class AnagramChecker
+{
+    static void Main()
+    {
+        Console.Write("Enter the first string: ");
+        string str1 = Console.ReadLine();
+        Console.Write("Enter the second string: ");
+        string str2 = Console.ReadLine();
+        bool isAnagram = str1.OrderBy(c => c).SequenceEqual(str2.OrderBy(c => c));
+        Console.WriteLine(isAnagram ? "The strings are anagrams." : "The strings are not anagrams.");
+    }
+}
+
