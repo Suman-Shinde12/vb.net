@@ -1,0 +1,45 @@
+OBSERVER DESIGN PATTERN
+using System;
+using System.Collections.Generic;
+interface IObserver
+{
+    void Update(string message);
+}
+class Subject
+{
+    private List<IObserver> observers = new List<IObserver>();
+    public void Attach(IObserver observer) => observers.Add(observer);
+    public void Detach(IObserver observer) => observers.Remove(observer);
+    public void Notify(string message)
+    {
+        foreach (var observer in observers)
+        {
+            observer.Update(message);
+        }
+    }
+}
+
+class Observer : IObserver
+{
+    private string name;
+    public Observer(string name) => this.name = name;
+    public void Update(string message)
+    {
+        Console.WriteLine($"{name} received: {message}");
+    }
+}
+class Program
+{
+    static void Main()
+    {
+        Subject subject = new Subject();
+        Observer observer1 = new Observer("Observer 1");
+        Observer observer2 = new Observer("Observer 2");
+        subject.Attach(observer1);
+        subject.Attach(observer2);
+        subject.Notify("Event 1 occurred.");
+        subject.Detach(observer1);
+        subject.Notify("Event 2 occurred.");
+    }
+}
+
