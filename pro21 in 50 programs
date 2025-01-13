@@ -1,0 +1,25 @@
+CUSTOM EXCEPTION HANDLING
+using System;
+class NegativeNumberException : Exception
+{
+    public NegativeNumberException(string message) : base(message) { }
+}
+class CustomExceptionExample
+{
+    static void Main()
+    {
+        try
+        {
+            Console.Write("Enter a positive number: ");
+            int num = int.Parse(Console.ReadLine());
+            if (num < 0)
+                throw new NegativeNumberException("Negative numbers are not allowed.");
+            Console.WriteLine($"You entered: {num}");
+        }
+        catch (NegativeNumberException ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
+    }
+}
+
