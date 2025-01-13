@@ -1,0 +1,31 @@
+CREATE A SPLASH SCREEN
+using System;
+using System.Windows.Forms;
+class SplashScreen : Form
+{
+    Timer timer;
+    public SplashScreen()
+    {
+        Text = "Splash Screen";
+        Size = new System.Drawing.Size(400, 200);
+        Label label = new Label
+        {
+            Text = "Welcome to My Application!",
+            Dock = DockStyle.Fill,
+            Font = new System.Drawing.Font("Arial", 20),
+            TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        };
+        timer = new Timer { Interval = 3000 }; // Close after 3 seconds
+        timer.Tick += (s, e) => { timer.Stop(); Close(); };
+
+        Controls.Add(label);
+        timer.Start();
+    }
+    [STAThread]
+    static void Main()
+    {
+        Application.EnableVisualStyles();
+        Application.Run(new SplashScreen());
+    }
+}
+
