@@ -1,0 +1,15 @@
+CONVERT A STRING TO TITLE CASE
+using System;
+using System.Globalization;
+class TitleCase
+{
+    static void Main()
+    {
+        Console.Write("Enter a sentence: ");
+        string input = Console.ReadLine();
+        TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+        string titleCase = textInfo.ToTitleCase(input.ToLower());
+        Console.WriteLine($"Title Case: {titleCase}");
+    }
+}
+
