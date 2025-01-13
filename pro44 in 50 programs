@@ -1,0 +1,30 @@
+CHECK IF A STRING CONTAINS BALANCED PARENTHESES
+using System;
+using System.Collections.Generic;
+class BalancedParentheses
+{
+    static bool IsBalanced(string str)
+    {
+        Stack<char> stack = new Stack<char>();
+        foreach (char ch in str)
+        {
+            if (ch == '(' || ch == '{' || ch == '[')
+                stack.Push(ch);
+            else if (ch == ')' || ch == '}' || ch == ']')
+            {
+                if (stack.Count == 0) return false;
+                char open = stack.Pop();
+                if (!((open == '(' && ch == ')') || (open == '{' && ch == '}') || (open == '[' && ch == ']')))
+                    return false;
+            }
+        }
+        return stack.Count == 0;
+    }
+    static void Main()
+    {
+        Console.Write("Enter a string with parentheses: ");
+        string input = Console.ReadLine();
+        Console.WriteLine(IsBalanced(input) ? "Balanced" : "Not Balanced");
+    }
+}
+
