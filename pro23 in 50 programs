@@ -1,0 +1,13 @@
+CONVERT DECIMAL TO BINARY
+using System;
+class DecimalToBinary
+{
+    static void Main()
+    {
+        Console.Write("Enter a decimal number: ");
+        int number = int.Parse(Console.ReadLine());
+        string binary = Convert.ToString(number, 2);
+        Console.WriteLine($"Binary representation: {binary}");
+    }
+}
+
