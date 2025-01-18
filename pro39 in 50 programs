@@ -10,25 +10,20 @@ class FileEncryptor
         string filePath = Console.ReadLine();
         Console.Write("Enter encryption password: ");
         string password = Console.ReadLine();
-        string encryptedFilePath = filePath + ".enc";
-        EncryptFile(filePath, encryptedFilePath, password);
-        Console.WriteLine($"File encrypted to {encryptedFilePath}");
+        EncryptFile(filePath, filePath + ".enc", password);
+        Console.WriteLine($"File encrypted to {filePath}.enc");
     }
     static void EncryptFile(string inputFile, string outputFile, string password)
     {
         byte[] key = new Rfc2898DeriveBytes(password, new byte[8]).GetBytes(32);
-        using (FileStream fsCrypt = new FileStream(outputFile, FileMode.Create))
-        using (Aes aes = Aes.Create())
-        {
-            aes.Key = key;
-            aes.GenerateIV();
-            fsCrypt.Write(aes.IV, 0, aes.IV.Length);
-            using (CryptoStream cs = new CryptoStream(fsCrypt, aes.CreateEncryptor(), CryptoStreamMode.Write))
-            using (FileStream fsIn = new FileStream(inputFile, FileMode.Open))
-            {
-                fsIn.CopyTo(cs);
-            }
-        }
+        using var aes = Aes.Create();
+        using var fsCrypt = new FileStream(outputFile, FileMode.Create);
+        aes.Key = key;
+        aes.GenerateIV();
+        fsCrypt.Write(aes.IV, 0, aes.IV.Length);
+        using var cs = new CryptoStream(fsCrypt, aes.CreateEncryptor(), CryptoStreamMode.Write);
+        using var fsIn = new FileStream(inputFile, FileMode.Open);
+        fsIn.CopyTo(cs);
     }
 }
 
