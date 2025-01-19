@@ -4,42 +4,25 @@ using System.Drawing;
 using System.Windows.Forms;
 class DrawingApp : Form
 {
-    private bool isDrawing = false;
+    private bool isDrawing;
     private Point lastPoint;
     public DrawingApp()
     {
         Text = "Drawing App";
-        this.MouseDown += StartDrawing;
-        this.MouseMove += Draw;
-        this.MouseUp += StopDrawing;
-    }
-    private void StartDrawing(object sender, MouseEventArgs e)
-    {
-        isDrawing = true;
-        lastPoint = e.Location;
-    }
-
-    private void Draw(object sender, MouseEventArgs e)
-    {
-        if (isDrawing && e.Button == MouseButtons.Left)
+        MouseDown += (s, e) => { isDrawing = true; lastPoint = e.Location; };
+        MouseMove += (s, e) =>
         {
-            using (Graphics g = CreateGraphics())
+            if (isDrawing && e.Button == MouseButtons.Left)
             {
+                using var g = CreateGraphics();
                 g.DrawLine(Pens.Black, lastPoint, e.Location);
                 lastPoint = e.Location;
             }
-        }
+        };
+        MouseUp += (s, e) => isDrawing = false;
     }
-
-    private void StopDrawing(object sender, MouseEventArgs e)
-    {
-        isDrawing = false;
-    }
-
     [STAThread]
-    static void Main()
-    {
-        Application.Run(new DrawingApp());
-    }
+    static void Main() => Application.Run(new DrawingApp());
 }
 
+   
