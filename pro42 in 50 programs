@@ -6,16 +6,12 @@ class NetworkMonitor
 {
     static void Main()
     {
-        foreach (var device in CaptureDeviceList.Instance)
-            Console.WriteLine(device.ToString());
+        var devices = CaptureDeviceList.Instance;
+        for (int i = 0; i < devices.Count; i++) Console.WriteLine($"{i}: {devices[i]}");
         Console.Write("Select a device: ");
-        int index = int.Parse(Console.ReadLine());
-        var device = CaptureDeviceList.Instance[index];
-        device.OnPacketArrival += (sender, e) =>
-        {
-            var packet = Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data);
-            Console.WriteLine(packet);
-        };
+        var device = devices[int.Parse(Console.ReadLine())];
+        device.OnPacketArrival += (s, e) => 
+            Console.WriteLine(Packet.ParsePacket(e.Packet.LinkLayerType, e.Packet.Data));
         device.Open();
         device.StartCapture();
         Console.WriteLine("Press Enter to stop...");
