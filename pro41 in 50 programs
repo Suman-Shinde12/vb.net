@@ -1,8 +1,4 @@
 CREATE A REST API USING ASP.NET
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 var app = builder.Build();
@@ -12,7 +8,7 @@ app.Run();
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    private static List<string> products = new List<string> { "Laptop", "Phone", "Tablet" };
+    private static List<string> products = new() { "Laptop", "Phone", "Tablet" };
     [HttpGet]
     public IEnumerable<string> Get() => products;
     [HttpPost]
