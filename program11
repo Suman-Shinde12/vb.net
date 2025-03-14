@@ -1,0 +1,54 @@
+WebForm1.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs"
+Inherits="Content_Linking.WebForm1" %>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>This is Page 1!</h1>
+<asp:Literal ID="litNavigation" runat="server"></asp:Literal>
+<p>The example uses the Content Linking Component to navigate between the pages in a text
+file.</p>
+<p>
+<a href="text/links2.txt"><img src="/images/btn_view_text.gif" alt="View Text File"></a>
+</p>
+</body>
+</html>
+WebForm2.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm2.aspx.cs"
+Inherits="Content_Linking.WebForm2" %>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>This is Page 2!</h1>
+<asp:Literal ID="litNavigation" runat="server"></asp:Literal>
+</body>
+</html>
+WebForm3.aspx:
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm3.aspx.cs"
+Inherits="Content_Linking.WebForm3" %>
+<!DOCTYPE html>
+<html>
+<body>
+<h1>This is Page 3!</h1>
+<asp:Literal ID="litNavigation" runat="server"></asp:Literal>
+</body>
+</html>
+WebForm1.aspx.cs, WebForm2.aspx.cs, WebForm3.aspx.cs (Same for All)
+using System;
+using System.IO;
+using System.Web.UI;
+namespace Content_Linking
+{
+public partial class WebForm1 : Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+string path = Server.MapPath("~/text/links2.txt");
+if (!File.Exists(path)) return;
+string[] pages = File.ReadAllLines(path);
+int index = Array.IndexOf(pages, Path.GetFileName(Request.Url.AbsolutePath));
+litNavigation.Text = (index > 0 ? $"<a href='{pages[index - 1]}'>Previous Page</a> " :
+"") + (index < pages.Length - 1 ? $"<a href='{pages[index + 1]}'>Next Page</a>" : "");
+}
+}
+}
