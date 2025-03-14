@@ -1,0 +1,85 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace Traffic_Control
+{
+public partial class Form1 : Form
+{
+public Form1()
+{
+InitializeComponent();
+red.Visible = true;
+yellow.Visible = false;
+green.Visible = false;
+}
+private void timer1_Tick(object sender, EventArgs e)
+{
+if (red.Visible == true)
+{
+red.Visible = false;
+yellow.Visible = false;
+green.Visible = true;
+textBox1.Text = "Have a safe journey";
+timerred.Enabled = true;
+}
+else if (green.Visible == true)
+{
+red.Visible = false;
+yellow.Visible = true;
+green.Visible = false;
+textBox1.Text = "slow down your vehicle";
+timeryellow.Enabled = true;
+}
+else if (yellow.Visible == true){
+red.Visible = true;
+yellow.Visible = false;
+green.Visible = false;
+textBox1.Text = "stop your vehicle";
+timergreen.Enabled = true;
+}
+}
+private void start_Click(object sender, EventArgs e)
+{
+timerred.Enabled = true;
+}
+private void stop_Click(object sender, EventArgs e)
+{
+timerred.Enabled = false;
+timeryellow.Enabled = false;
+timergreen.Enabled = false;
+red.Visible = true;
+yellow.Visible = false;
+green.Visible = false;
+textBox1.Text = "Stop your vehicle";
+}
+private void timerred_Tick(object sender, EventArgs e)
+{
+timerred.Enabled = false;
+timer1_Tick(sender, e);
+}
+private void timeryellow_Tick(object sender, EventArgs e)
+{
+timeryellow.Enabled = false;
+timer1_Tick(sender, e);
+}
+private void timergreen_Tick(object sender, EventArgs e)
+{
+timergreen.Enabled = false;
+timer1_Tick(sender, e);
+}
+private void button3_Click(object sender, EventArgs e)
+{
+Environment.Exit(0);
+}
+private void ClearInputs()
+{
+textBox1.Clear();
+}
+}
+}
