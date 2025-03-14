@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+<Ad>
+<ImageUrl>img/1.png</ImageUrl>
+<NavigateUrl>https://meeraacademy.com</NavigateUrl>
+<AlternateText>Meera Academy</AlternateText>
+<Impressions>50</Impressions>
+<Keyword>Meera</Keyword>
+</Ad>
+<Ad>
+<ImageUrl>img/2.png</ImageUrl>
+<NavigateUrl>http://meera.com</NavigateUrl>
+<AlternateText>Meerta Aademy</AlternateText>
+<Impressions>100</Impressions>
+<Keyword>Academy</Keyword>
+</Ad>
+<Ad>
+<ImageUrl>img/3.png</ImageUrl>
+<NavigateUrl>https://meeraacademy.com</NavigateUrl>
+<AlternateText>Meerta Aademy</AlternateText>
+<Impressions>50</Impressions>
+<Keyword>Academy</Keyword>
+</Ad>
+</Advertisements>
