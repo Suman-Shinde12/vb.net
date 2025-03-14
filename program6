@@ -1,0 +1,67 @@
+Source Code:
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+namespace WebApplication9
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void submit_Click(object sender, EventArgs e)
+{
+string s = TextBox1.Text;
+int num = 0, cl = 0, sl = 0, sp = 0, ss = 0;
+foreach (char c in s)
+{
+if (Char.IsDigit(c)) num++;
+else if (Char.IsUpper(c)) cl++;
+else if (Char.IsLower(c)) sl++;
+else if (Char.IsWhiteSpace(c)) sp++;
+else sp++;
+}
+Label3.Text = $"number of digits:{num}<br/>" + $"capital letters:{cl}<br/>" +$"small
+letters:{sl}<br/>" + $"spaces:{sp}<br/>" + $"special symbols:{sp++}";
+}
+protected void apply_Click(object sender, EventArgs e)
+{
+string s = TextBox2.Text;
+int choice = Convert.ToInt32(DropDownList1.SelectedValue);
+string output = "";
+switch (choice)
+{
+case 1:
+output = (string)s.Clone();
+break;
+case 2:
+output = s.Contains(TextBox3.Text) ? "True" : "False";
+break;
+case 3:
+output = s.ToLower();
+break;
+case 4:
+output = s.ToUpper();
+break;
+case 5:
+output = s.Trim();
+break;
+case 6:
+int start = int.Parse(TextBox4.Text);
+int length = int.Parse(TextBox5.Text);
+output = s.Substring(start, length);
+break;
+case 7:
+output = s.Replace(TextBox6.Text, TextBox7.Text);
+break;
+default:
+output = "Invalid choice.";
+break;
+}
+Label11.Text = "Output: " + output;
+}
+}
+}
