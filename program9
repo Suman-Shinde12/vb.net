@@ -1,0 +1,51 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Data.SqlClient;
+using System.Data;
+namespace DataBoundControl
+{
+public partial class WebForm1 : System.Web.UI.Page
+{
+SqlCommand cmd;
+SqlConnection con;
+SqlDataReader rd;
+SqlDataAdapter adap;
+string query;
+DataTable dt;
+public void dbconn()
+{
+string conn = System.Configuration.ConfigurationManager.ConnectionStrings
+["mark"].ToString();
+con = new SqlConnection(conn);
+con.Open();
+}
+protected void Page_Load(object sender, EventArgs e)
+{
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+dbconn();
+query = "INSERT INTO marks_info(name,dot_net,aiml,st,sbs,lab) VALUES ('" +
+T1.Text + "','" + T2.Text + " ','" + T3.Text + "','" + T4.Text + "','" + T5.Text + "','" +
+T6.Text + "')";
+cmd = new SqlCommand(query, con);
+cmd.ExecuteNonQuery();
+Response.Write("<script> alert('data saved')</script>");
+}
+protected void Button2_Click(object sender, EventArgs e)
+{
+dbconn();
+query = " SELECT * FROM marks_info";
+cmd = new SqlCommand(query, con);
+adap = new SqlDataAdapter(cmd);
+dt = new DataTable();
+adap.Fill(dt);
+GridView1.DataSource = dt;
+GridView1.DataBind();
+}
+}
+}
