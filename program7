@@ -1,0 +1,42 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.IO;
+namespace WebApplication2
+{
+public partial class Upload_File : System.Web.UI.Page
+{
+protected void FileUpload1_DataBinding(object sender, EventArgs e)
+{
+}
+protected void Button1_Click(object sender, EventArgs e)
+{
+if (FileUpload1.HasFile)
+{
+string pathoffolder = Server.MapPath("~/upload images/");
+if (!Directory.Exists(pathoffolder))
+{
+Directory.CreateDirectory(pathoffolder);
+}
+string getfilename = Path.GetFileName(FileUpload1.FileName);
+string savePath = Path.Combine(pathoffolder, getfilename);
+try
+{
+FileUpload1.SaveAs(savePath);
+Label1.Text = getfilename + " has been uploaded successfully.";
+}
+catch (Exception ex)
+{
+Label1.Text = "Error: " + ex.Message;
+}
+}
+else
+{
+Label1.Text = "No file selected.";
+}
+}
+}
+}
