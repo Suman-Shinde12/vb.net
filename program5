@@ -1,0 +1,97 @@
+5. Exception Handling
+Source Code (Form1):
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace Exception_Handling_1
+{
+public partial class Form1 : Form{
+public Form1()
+{
+InitializeComponent();
+}
+private void button1_Click(object sender, EventArgs e){
+try{
+int numerator = Convert.ToInt32(textBox1.Text);
+int denominator = Convert.ToInt32(textBox2.Text);
+int Answer = numerator / denominator;
+textBox3.Text = Answer.ToString();
+}
+catch (FormatException){
+MessageBox.Show("Invalid input enter two numbers please");
+}
+catch (DivideByZeroException divideByZeroException){
+MessageBox.Show(divideByZeroException.Message, "Can't divide by zero");
+}
+finally{
+textBox1.Text = "";
+textBox2.Text = "";
+}
+}
+private void button2_Click(object sender, EventArgs e){
+var form2 = new Form2();
+form2.Show();
+this.Hide();
+}
+}
+}
+Form2:
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+namespace Exception_Handling_1
+{
+public partial class Form2 : Form
+{
+public Form2()
+{
+InitializeComponent();
+}
+private void button1_Click(object sender, EventArgs e)
+{
+try
+{
+int day = Convert.ToInt32(textBox1.Text);
+int month = Convert.ToInt32(textBox2.Text);
+int year = Convert.ToInt32(textBox3.Text);
+DateTime accessionDate = new DateTime(year, month, day);
+MessageBox.Show($"Valid Accession Date:
+{accessionDate.ToString("dd/MM/yyyy")}");
+}
+catch (FormatException)
+{
+MessageBox.Show("Invalid input. Please enter numeric values only.", "Input Error");
+}
+catch (ArgumentOutOfRangeException){
+MessageBox.Show("Invalid date. Please check the day, month, and year values.",
+"Date Error");
+}
+catch (Exception ex)
+{
+MessageBox.Show($"Unexpected error: {ex.Message}", "Error");
+}
+Finally
+{
+textBox1.Clear();
+textBox2.Clear();
+textBox3.Clear();
+}
+}
+private void button2_Click(object sender, EventArgs e)
+{
+Environment.Exit(0);
+}
+}
+}
